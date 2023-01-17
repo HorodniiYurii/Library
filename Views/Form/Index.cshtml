@@ -1,0 +1,44 @@
+﻿@model Library.Models.CreateCatalogModel
+@{
+    ViewBag.Title = "Catalog";
+}
+
+<h2>База книг</h2>
+@using (Html.BeginForm("CreateApplication", "Form", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <th>Ім'я</th>
+            <th>Кількість сторінок</th>
+            <th>Дата видачі</th>
+            <th>Видавництво</th>
+        </tr>
+
+        @for (int i = 0; i < Model.Publications.Count; i++)
+        {
+    <tr>
+
+        <td>
+            @Html.TextBoxFor(p => p.Publications[i].Publication.Name, new { @class = "form-control", @readonly = "readonly" })
+        </td>
+        <td>
+            @Html.TextBoxFor(p => p.Publications[i].Publication.NofPages, new { @class = "form-control", @readonly = "readonly" })
+        </td>
+        <td>
+            @Html.TextBoxFor(p => p.Publications[i].Publication.PublicationDate, new { @class = "form-control", @readonly = "readonly" })
+        </td>
+        <td>
+            @Html.TextBoxFor(p => p.Publications[i].Publication.Publisher, new { @class = "form-control", @readonly = "readonly" })
+        </td>
+        <td>
+            @Html.CheckBoxFor(p => p.Publications[i].IsAdded)
+        </td>
+        <td>
+            @Html.HiddenFor(p => p.Publications[i].Publication.Id, new { @class = "form-control", @readonly = "readonly" })
+        </td>
+    </tr>
+
+        }
+    </table>
+    <input type="submit" value="submit" />
+}
